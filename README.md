@@ -1,51 +1,149 @@
-# Welcome to your Expo app 👋
+<div align="center">
+  <h1>Justine's Beauty Portfolio!</h1>
+  <h5>Helpful Link To Create React Native App: https://docs.expo.dev/get-started/start-developing/ </h5>
+</div>
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+<div style="margin-bottom: 10px;">
+  <h3>✅ 1. Create App</h3>
+  <pre><code>
+   $ cd Desktop
+   $ nvm install node
+   $ npm install -g expo-cli
+   $ npx create-expo-app AppName
+   $ cd AppName
+   $ npx expo start
+  </code></pre>
+</div>
 
-## Get started
+<div style="margin-bottom: 10px;">
+   <h5 style="color: red;">‼️ ERROR ‼️</h5>
 
-1. Install dependencies
+   🔴 If you get this error: 
+  <pre><code>
+   node:events:497
+         throw er; // Unhandled 'error' event
+         ^
 
-   ```bash
-   npm install
-   ```
+   Error: EMFILE: too many open files, watch
+      at FSEvent.FSWatcher._handle.onchange (node:internal/fs/watchers:207:21)
+   Emitted 'error' event on NodeWatcher instance at:
+      at FSWatcher._checkedEmitError (/Users/ilenevarela-zul/Desktop/BeautyByJustine/node_modules/metro-file-map/src/watchers/NodeWatcher.js:82:12)
+      at FSWatcher.emit (node:events:519:28)
+      at FSEvent.FSWatcher._handle.onchange (node:internal/fs/watchers:213:12) {
+   errno: -24,
+   syscall: 'watch',
+   code: 'EMFILE',
+   filename: null
+   }
 
-2. Start the app
+   Node.js v22.9.0
+   </code></pre>
+   🔴 OR
+  <pre><code>
+   ilenevarela-zul@Ilenes-MacBook-Air BeautyByJustine % npm run android
 
-   ```bash
-    npx expo start
-   ```
+   > beautybyjustine@1.0.0 android
+   > expo start --android
 
-In the output, you'll find options to open the app in a
+   Starting project at /Users/ilenevarela-zul/Desktop/BeautyByJustine
+   (node:39983) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+   (Use `node --trace-deprecation ...` to show where the warning was created)
+   Starting Metro Bundler
+   Error: EMFILE: too many open files, watch
+      at FSEvent.FSWatcher._handle.onchange (node:internal/fs/watchers:207:21)
+  </code></pre>
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+   🟢 Run:
+   <pre><code>
+   $ rm -rf node_modules
+   $ npm cache clean --force
+   $ npm install
+   </code></pre>
+   🟢 And:
+   <pre><code>
+   $ ulimit -n 
+   (To check how many files are opened)
+   $ ulimit -n ####  
+   (To increase number of files you can have opened)
+   </code></pre>
+   Then start the app again! 
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+   <h5 style="color: red;">‼️ End of ERROR ‼️</h5>
+</div>
 
-## Get a fresh project
+<div>
 
-When you're ready, run:
+<div style="margin-bottom: 10px;">
+   <h3>✅ 2. Connecting to GitHub </h3>
+   <img align="center" src="./assets/images/ReadMeGitHubConnection.png" alt="Step to add to Github" width="400" />
+</div>
 
-```bash
-npm run reset-project
-```
+<div>
+   <h3>✅ 3. Start Creating App! </h3>
+      <h4>Create a blank branch first!</h4>
+      <h4>✏️ Restart you app to a blank slate so you can start your project!</h4>
+   <pre><code>
+      $ npm run reset-project 
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+   </code></pre>
+      <h4>✏️ Lets get rid of the React Native default Layout! </h4>
+      <img src="./assets/images/ReactNativeLayout.png" alt="Default Native Layout" width="400" />
+   <pre><code>
+      ⏺ To get rid of this (In your _layout.tsx file) 
+      import { Stack } from "expo-router";
 
-## Learn more
+      export default function RootLayout() {
 
-To learn more about developing your project with Expo, look at the following resources:
+      return (
+         <Stack screenOptions={{ headerShown: false, }}>
+            <Stack.Screen name="index" />
+         </Stack>
+      );
+      }
+   </code></pre>
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+   <h4>✏️ To allow the mobile status bar to show (This is how the current app will showcase the status bar)</h4>
+   <pre><code>
+       useEffect(() => {
+         StatusBar.setBarStyle("light-content");
+         StatusBar.setBackgroundColor("black");
+      }, []);
+   </code></pre>
 
-## Join the community
+   <h4>✏️ To allow work to be on the botton of status bar, not behind. </h4>
+   <pre><code>
+      <ScrollView contentContainerStyle={styles.scrollView} style={styles.container} showsVerticalScrollIndicator={false} > 
+      🟢 contentContainerStyle={styles.scrollView} = Used to apply styles to the inner content of the ScrollView 
+      🟢 style={styles.container} = Style applied to the ScrollView itself
+      🟢 showsVerticalScrollIndicator={false} = Shows or hides the vertical scroll indicator (set to false to hide it)
+      const styles = StyleSheet.create({
+         Style for the main container, sets background color, flex behavior, and borders
+         container: {
+            backgroundColor: "black", 
+             - Background color of the main container
+            flex: 1,  
+             - Allow the container to expand and fill available space
+            borderColor: "red", 
+             - Red border color for visual debugging
+            borderWidth: 3, 
+             - Width of the border
+         },
+         Style for the ScrollView's content, with padding to accommodate the status bar
+         scrollView: {
+            paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0, 
+             - Adds top padding equal to the status bar height for Android
+         },
+         Style for the content inside the ScrollView, allowing it to grow and be centered
+         content: {
+            flexGrow: 1, 
+             - Allows the content to grow to fill the ScrollView
+            alignItems: "center", 
+             - Centers the content horizontally
+            justifyContent: "center", 
+             - Centers the content vertically
+         },
+      });
+   </code></pre>
 
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
-# NailsByJustine
+   <h4></h4>
+</div>
